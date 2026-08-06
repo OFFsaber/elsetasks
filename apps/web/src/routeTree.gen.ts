@@ -504,6 +504,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/device'
     | '/test-error'
+    | '/setup'
     | '/auth/check-email'
     | '/auth/sign-in'
     | '/auth/sign-up'
@@ -550,6 +551,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/test-error'
+    | '/setup'
     | '/auth/check-email'
     | '/auth/sign-in'
     | '/auth/sign-up'
@@ -596,6 +598,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/device'
     | '/test-error'
+    | '/setup'
     | '/_layout/_authenticated'
     | '/auth/check-email'
     | '/auth/sign-in'
@@ -687,6 +690,13 @@ declare module '@tanstack/react-router' {
       path: '/test-error'
       fullPath: '/test-error'
       preLoaderRoute: typeof TestErrorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/setup': {
+      id: '/setup'
+      path: '/setup'
+      fullPath: '/setup'
+      preLoaderRoute: typeof SetupRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_layout/_authenticated': {
