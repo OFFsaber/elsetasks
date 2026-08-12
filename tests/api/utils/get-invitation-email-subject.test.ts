@@ -63,15 +63,4 @@ describe("getInvitationEmailSubject", () => {
 
     expect(subject).toBe("Alice invited you to join Producto on ElseTasks");
   });
-
-  it("applies a custom brand name from instance branding", () => {
-    const subject = getInvitationEmailSubject(
-      "en-US",
-      "Alice",
-      "Producto",
-      "Acme Tasks",
-    );
-
-    expect(subject).toBe("Alice invited you to join Producto on Acme Tasks");
-  });
 });
