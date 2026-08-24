@@ -12,6 +12,7 @@ import getProjectCtrl from "./controllers/get-project";
 import getProjectsCtrl from "./controllers/get-projects";
 import unarchiveProjectCtrl from "./controllers/unarchive-project";
 import updateProjectCtrl from "./controllers/update-project";
+import { PROJECT_TYPE_KEYS } from "./project-types";
 
 const project = new Hono<{
   Variables: {
@@ -74,15 +75,24 @@ const project = new Hono<{
         workspaceId: v.string(),
         icon: v.string(),
         slug: v.string(),
+        clientId: v.optional(v.nullable(v.string())),
+        projectType: v.optional(v.picklist(PROJECT_TYPE_KEYS)),
       }),
     ),
     workspaceAccess.fromBody(),
     requireWorkspacePermission({ project: ["create"] }),
     requireEntitlement,
     async (c) => {
-      const { name, icon, slug } = c.req.valid("json");
+      const { name, icon, slug, clientId, projectType } = c.req.valid("json");
       const workspaceId = c.get("workspaceId");
-      const newProject = await createProjectCtrl(workspaceId, name, icon, slug);
+      const newProject = await createProjectCtrl(
+        workspaceId,
+        name,
+        icon,
+        slug,
+        clientId,
+        projectType,
+      );
       return c.json(newProject);
     },
   )
